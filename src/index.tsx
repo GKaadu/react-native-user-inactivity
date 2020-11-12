@@ -120,7 +120,7 @@ const UserInactivity: React.FC<UserInactivityProps> = ({
   const initialEnabled = isEnabled === undefined ? true : isEnabled;
   const [enabled, setEnabled] = useState(initialActive);
   useEffect(() => {
-      setEnabled(initialEnabled);
+      setEnabled(isEnabled || true);
       if (isEnabled) {
           setTimer();
       } else {
