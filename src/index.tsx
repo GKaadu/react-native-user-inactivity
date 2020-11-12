@@ -118,9 +118,9 @@ const UserInactivity: React.FC<UserInactivityProps> = ({
    * Handle enabled on or off
    */
   const initialEnabled = isEnabled === undefined ? true : isEnabled;
-  const [enabled, setEnabled] = useState(initialActive);
+  const enabled = useRef(initialEnabled);
   useEffect(() => {
-      setEnabled(isEnabled || true);
+      enabled.current = isEnabled === undefined ? true : isEnabled;
       if (isEnabled) {
           setTimer();
       } else {
@@ -183,7 +183,7 @@ const UserInactivity: React.FC<UserInactivityProps> = ({
    * `this.state.inactive` turns to true.
    */
   function resetTimerDueToActivity() {
-    if (!enabled) {
+    if (!enabled.current) {
         return;
     }
     cancelTimer();
